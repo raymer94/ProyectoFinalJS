@@ -16,7 +16,7 @@ firebase.initializeApp(firebaseConfig);
 function verifcacionUser(){
     return new Promise(resolve =>{
         setTimeout(()=>{
-            if(location.pathname != "/login.html")
+            if(location.pathname != "/ProyectoFinalJS/Social-Christ/login.html")
             {
                 let user = firebase.auth().currentUser;
                 if(user == null || user == undefined)
@@ -34,24 +34,6 @@ async function vericall() {
     // expected output: "resolved"
   }
   vericall();
-
-
-function UploadImage(){
-    let ref = firebase.storage().ref();
-    let file = document.getElementById("image").files[0];
-    let name = file.name;
-    const metadata = {
-        contentType: file.type
-    }
-
-    ref.child(name).put(file, metadata); 
-    //ref.child(name).getDownloadURL().then(url => console.log(url));
-    // task.then(snapShot => snapShot.ref.getDownloadURL())
-    // .then(url => console.log(url));
-    // console.log(file);
-    //pintar IMG
-    //document.getElementById().src = URL
-}
 
 function registrer() {
     let email = document.getElementById("emailR").value;
