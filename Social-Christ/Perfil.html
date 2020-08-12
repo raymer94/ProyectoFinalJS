@@ -77,9 +77,8 @@
                   <img src="images/users/user-1.jpg" alt="" class="img-responsive profile-photo" id="imgPerfil"/>
                   <h3 id="nombre">Sarah Cruiz</h3>
                   <p class="text-muted" id="ocupacion">Creative Director</p>
-                  <input type="file" id="imgPerfilUpload">
-                  <input type="file" id="imgFondoUpload">
-                  <button onclick="UploadImage()">Subir imagen</button>
+                  
+                  <button class="btn-primary" data-toggle="modal" data-target="#editarFotoModal">Editar fotos de perfil</button>
                 <img width="30%" > 
                 </div>
               </div>
@@ -149,7 +148,7 @@
         </div>
       </div>
     </div>
-   
+   <!--Modal para editar info de perfil-->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -162,7 +161,7 @@
           <div class="modal-body">
             <form id="formularioModal">
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nombre:</label>
+                <label for="recipient-name" class="col-form-label">Nombre de usuario:</label>
                 <input type="text" class="form-control" id="nombreU">
               </div>
               <div class="form-group">
@@ -186,6 +185,41 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" onclick="editarPerfil()">Actualizar datos</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!--Modal para editar fotos de perfil-->
+    <div class="modal fade" id="editarFotoModal" tabindex="-1" role="dialog" aria-labelledby="editarFotoModal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editarFotoModalLabel">Editar fotos de perfil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              
+              <div class="form-group" data-validate = "Password is required">
+                <label>Elegir foto de perfil</label>           
+                <input type="file" id="imgPerfilUpload">
+              </div>
+              <div class="form-group" data-validate = "Password is required" >
+                <label>Elegir foto de fondo</label>
+                <input type="file" id="imgFondoUpload">               
+              </div>
+
+              <div class="form-group" data-validate = "Password is required" >
+                <label>Eliminar foto de perfil</label> <br>
+                <button class="btn btn-danger" onclick="deleteImgProfile()">Eliminar mi actual foto de perfil</button>              
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-info" onclick="UploadImage()">Actualizar foto</button>
           </div>
         </div>
       </div>

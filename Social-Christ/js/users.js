@@ -9,7 +9,9 @@ function agregarDatosUsuario()
         informacionPersonal: "",
         lenguajes: "",
         imagenPerfilUrl: "",
-        imagenFondoUrl: ""  
+        imagenFondoUrl: "" ,
+        imageNamePerfil: "",
+        imageNameFondo: ""
       }).then((res)=>{
        
       }).catch((err)=>{
