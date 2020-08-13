@@ -16,7 +16,7 @@ firebase.initializeApp(firebaseConfig);
 function verifcacionUser(){
     return new Promise(resolve =>{
         setTimeout(()=>{
-            if(location.pathname != "/ProyectoFinalJS/Social-Christ/login.html")
+            if(location.pathname != "/Social-Christ/login.html")
             {
                 let user = firebase.auth().currentUser;
                 if(user == null || user == undefined)
@@ -27,6 +27,7 @@ function verifcacionUser(){
         }, 1000)
     })
 }
+
 async function vericall() {
     console.log('calling');
     const result = await verifcacionUser();
@@ -35,51 +36,47 @@ async function vericall() {
   }
   vericall();
 
-function agregarDatosUsuario() {
-    let doc = firebase.auth().currentUser.uid;
-    database.collection("users").doc(doc).set({
-        username: "",
-        ocupacion: "",
-        informacionPersonal: "",
-        lenguajes: "",
-        imagenPerfilUrl: "",
-        imagenFondoUrl: "",
-        imageNamePerfil: "",
-        imageNameFondo: ""
-    }).then((res) => {
-        console.log("coleccion agregada");
-    }).catch((err) => {
-        console.log("ha ocurrido un error: ", err);
-    });
-
+ function agregarDatosUsuario(userColection, email, password) {
+    return new Promise(resolve =>{
+        setTimeout(()=>{
+            firebase.auth().createUserWithEmailAndPassword(email, password).then((res) => {
+                doc = res.user.uid;
+                userColection.doc(doc).set({
+                    username: "",
+                    ocupacion: "",
+                    informacionPersonal: "",
+                    lenguajes: "",
+                    imagenPerfilUrl: "",
+                    imagenFondoUrl: "",
+                    imageNamePerfil: "",
+                    imageNameFondo: ""
+                });
+                alert("usuario agregado");
+                document.getElementById("emailR").value = "";
+                document.getElementById("passR").value = "";
+                document.getElementById("passRR").value = "";
+          
+            }).catch(function (error) {
+                alert(error);
+            });
+            resolve()
+        }, 1000)
+    })
 }
 
-function registrer() {
+async function registrer() {
     let email = document.getElementById("emailR").value;
     let password = document.getElementById("passR").value;
     let passwordConfirm = document.getElementById("passRR").value;
+    var doc;
+    let userColection = database.collection("users");
     if(password == passwordConfirm)
-    {
-    firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
-        alert("usuario agregado");
-  
-    }).catch(function (error) {
-        alert(error);
-    });
-    let doc = firebase.auth().currentUser.uid;
-    database.collection("users").doc(doc).set({
-        username: "",
-        ocupacion: "",
-        informacionPersonal: "",
-        lenguajes: "",
-        imagenPerfilUrl: "",
-        imagenFondoUrl: "",
-        imageNamePerfil: "",
-        imageNameFondo: ""
-    });
-    window.location.href = "login.html";
+    {    
+      await agregarDatosUsuario(userColection, email, password);
+      
     }
     else alert("Las contraseñas no coinciden");
+    //window.location.href = "login.html";
 }
 
 function login() {
