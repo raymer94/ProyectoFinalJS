@@ -38,6 +38,10 @@ database.collection("users").onSnapshot((e) => {
       </div>
     </div>
   </div>`;
+  if(firebase.auth().currentUser.uid == element.id){
+    document.getElementById("usurName").innerHTML = element.data().username;
+    $("#imgUser").attr("src", element.data().imagenPerfilUrl == "" ?  "./images/usuario.jpg": element.data().imagenPerfilUrl);
+  }
 });
 callFriends();
 });
