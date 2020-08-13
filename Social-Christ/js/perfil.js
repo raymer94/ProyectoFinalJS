@@ -1,5 +1,4 @@
 function editarPerfil(){
-    alert("editando perfil");
 let form = document.querySelectorAll("#formularioModal");
 let user = firebase.auth().currentUser.uid;
            UserDataUpdate(user, form)
@@ -16,7 +15,8 @@ function UserDataUpdate(user, form, img, url, name)
         lenguaje1: form[0][3].value,
         lenguaje2: form[0][4].value
     }).then((res)=>{
-
+      alert("se actualizaron tus datos");
+        $("#closeModalEditarPerfil").click();
     }).catch((err)=>{
         alert("no se actualizaron los datos" + err)
     });
@@ -27,7 +27,8 @@ function UserDataUpdate(user, form, img, url, name)
           imagenPerfilUrl: url,
           imageNamePerfil: name
       }).then((res)=>{
-        alert("se actualizo tu foto de perfil")
+        alert("se actualizo tu foto de perfil");
+        $("#closeModalEditarFoto").click();
       }).catch((err)=>{
           alert("no se actualizaron los datos" + err)
       });
@@ -37,7 +38,8 @@ function UserDataUpdate(user, form, img, url, name)
       imagenFondoUrl: url,
       imageNameFondo: name
       }).then((res)=>{
-        alert("se actualizo tu foto de fondo")
+        alert("se actualizo tu foto de fondo");
+        $("#closeModalEditarFoto").click();
       }).catch((err)=>{
           alert("no se actualizaron los datos" + err)
       });
@@ -74,6 +76,30 @@ function UploadImage(){
     document.getElementById("imgFondoUpload").value = "";
   });
   }
+}
+
+function solitarCambioPassWord()
+{
+  let claveNueva = $("#claveNueva").val(); 
+  let claveNuevaConfirm = $("#claveNuevaConfirm").val();  
+  if(claveNueva == "" && claveNuevaConfirm == ""){alert("Debe de llenar los campos"); return;}
+  if(claveNueva == claveNuevaConfirm){changePassword(claveNueva);}
+  else alert("Las contraseñas no coincide");
+}
+
+function changePassword(nuevaClave)
+{
+  var user = firebase.auth().currentUser;
+
+  user.updatePassword(nuevaClave).then(function() {
+    // Update successful.
+    alert("Se ha cambiado su clave");
+    $("#CloseModalClave").click();
+  }).catch(function(error) {
+    // An error happened.
+    error = error.message == "Password should be at least 6 characters" ? "Su clave debe de tener minimo 6 caracteres" : error;
+    alert("ha ocurrido un error: "+ error);
+  });
 }
 
 function deleteImgProfile()

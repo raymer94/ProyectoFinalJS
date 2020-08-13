@@ -48,7 +48,13 @@
             <ul class="nav navbar-nav navbar-right main-menu">
               <li class="dropdown"><a href="index.html">Home</a></li>
 
-              <li class="dropdown"><a onclick="signOut()">Cerrar Session</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span><img src="images/down-arrow.png" alt="" /></span></a>
+                <ul class="dropdown-menu login">
+                  <li><a data-toggle="modal" style="cursor: pointer;" data-target="#editarContraseñaModal">Cambiar contraseña</a></li>
+                  <li><a onclick="signOut()" style="cursor: pointer;"><span class="fa fa-sign-out"></span> Cerrar Session</a></li>
+                </ul>
+              </li>
             </ul>
             <form class="navbar-form navbar-right hidden-sm">
               <div class="form-group">
@@ -183,7 +189,7 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button  id="closeModalEditarPerfil" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" onclick="editarPerfil()">Actualizar datos</button>
           </div>
         </div>
@@ -218,8 +224,38 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">cerrar</button>
+            <button id="closeModalEditarFoto" type="button" class="btn btn-danger" data-dismiss="modal">cerrar</button>
             <button type="button" class="btn btn-info" onclick="UploadImage()">Actualizar foto</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!--Modal para editar contraseña-->
+     <div class="modal fade" id="editarContraseñaModal" tabindex="-1" role="dialog" aria-labelledby="editarContraseña" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editarContraseñaLabel">Editar contraseña</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nueva contraseña</label>
+                <input type="text" class="form-control" id="claveNueva">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Confirmar nueva contraseña</label>
+                <input type="text" class="form-control" id="claveNuevaConfirm">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button id="CloseModalClave" type="button" class="btn btn-danger" data-dismiss="modal">cerrar</button>
+            <button type="button" class="btn btn-info" onclick="solitarCambioPassWord()">Actualizar contraseña</button>
           </div>
         </div>
       </div>
