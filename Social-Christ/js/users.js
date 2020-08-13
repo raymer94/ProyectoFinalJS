@@ -1,21 +1,9 @@
 var database = firebase.firestore();
 
-function agregarDatosUsuario()
+
+
+function usersFromDatabase()
 {
-    let doc = firebase.auth().currentUser.uid;
-    database.collection("users").doc(doc).set({
-        username: "",
-        ocupacion: "",
-        informacionPersonal: "",
-        lenguajes: "",
-        imagenPerfilUrl: "",
-        imagenFondoUrl: "" ,
-        imageNamePerfil: "",
-        imageNameFondo: ""
-      }).then((res)=>{
-       
-      }).catch((err)=>{
-          console.log("ha ocurrido un error: ", err);
-      });
-    
+    let users = database.collection("users");
+    console.log();
 }

@@ -35,6 +35,25 @@ async function vericall() {
   }
   vericall();
 
+function agregarDatosUsuario() {
+    let doc = firebase.auth().currentUser.uid;
+    database.collection("users").doc(doc).set({
+        username: "",
+        ocupacion: "",
+        informacionPersonal: "",
+        lenguajes: "",
+        imagenPerfilUrl: "",
+        imagenFondoUrl: "",
+        imageNamePerfil: "",
+        imageNameFondo: ""
+    }).then((res) => {
+        console.log("coleccion agregada");
+    }).catch((err) => {
+        console.log("ha ocurrido un error: ", err);
+    });
+
+}
+
 function registrer() {
     let email = document.getElementById("emailR").value;
     let password = document.getElementById("passR").value;
@@ -43,11 +62,22 @@ function registrer() {
     {
     firebase.auth().createUserWithEmailAndPassword(email, password).then(() => {
         alert("usuario agregado");
-        agregarDatosUsuario();
-
+  
     }).catch(function (error) {
         alert(error);
     });
+    let doc = firebase.auth().currentUser.uid;
+    database.collection("users").doc(doc).set({
+        username: "",
+        ocupacion: "",
+        informacionPersonal: "",
+        lenguajes: "",
+        imagenPerfilUrl: "",
+        imagenFondoUrl: "",
+        imageNamePerfil: "",
+        imageNameFondo: ""
+    });
+    window.location.href = "login.html";
     }
     else alert("Las contraseñas no coinciden");
 }
