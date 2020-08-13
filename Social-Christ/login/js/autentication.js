@@ -45,11 +45,12 @@ async function vericall() {
                     username: "",
                     ocupacion: "",
                     informacionPersonal: "",
-                    lenguajes: "",
                     imagenPerfilUrl: "",
                     imagenFondoUrl: "",
                     imageNamePerfil: "",
-                    imageNameFondo: ""
+                    imageNameFondo: "",
+                    lenguaje1: "",
+                    lenguaje2: ""
                 });
                 alert("usuario agregado");
                 document.getElementById("emailR").value = "";

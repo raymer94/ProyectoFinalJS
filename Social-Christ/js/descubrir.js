@@ -38,15 +38,18 @@ database.collection("users").onSnapshot((e) => {
       </div>
     </div>
   </div>`;
-    });
+});
+callFriends();
 });
 function addFriend(friend)
 {
     let amigoId = friend.id;
+    let doc = firebase.auth().currentUser.uid;  
     database.collection("users").doc(doc).collection("friends").doc(amigoId).set({
         
       }).then((res)=>{
         alert("se ha agregado a tus amigos");
+        location.reload();
       }).catch((err)=>{
           console.log("ha ocurrido un error: ", err);
       });
