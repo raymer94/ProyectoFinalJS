@@ -112,7 +112,7 @@ function deleteImgProfile()
   desertRef.delete();
   let user = firebase.auth().currentUser.uid;
   database.collection("users").doc(user).update({
-    imagenPerfilUrl: "",
+    imagenPerfilUrl: "https://firebasestorage.googleapis.com/v0/b/chatjs-a84dd.appspot.com/o/usuario.JPG?alt=media&token=c6fb7ae3-541c-4141-9db4-fbe021ed48f1",
   });
 }
 

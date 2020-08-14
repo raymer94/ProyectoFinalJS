@@ -51,6 +51,7 @@ function callFriendsData(){
                                                     <a onclick="eliminarAmigo('${element.id}')" class="pull-right text-green btn btn-danger" style="color: #fff;">eliminar</a>
                                                     <h5><a href="timeline.html" class="profile-link">${on.data().username}</a></h5>
                                                     <p>${on.data().ocupacion}</p>
+                                                    <p>"${on.data().informacionPersonal}"</p>
                                                 </div>
                                                 </div>
                                             </div>

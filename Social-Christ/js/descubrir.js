@@ -40,6 +40,7 @@ database.collection("users").onSnapshot((e) => {
   </div>`;
   if(firebase.auth().currentUser.uid == element.id){
     document.getElementById("usurName").innerHTML = element.data().username;
+    $(`#${element.id}`).prop('disabled', true);
     $("#imgUser").attr("src", element.data().imagenPerfilUrl == "" ?  "./images/usuario.jpg": element.data().imagenPerfilUrl);
   }
 });

@@ -1558,7 +1558,9 @@ ul.album-photos li img{
 
 #footer{
   background: #fff;
+  bottom: 0px;
   position: relative;
+  width: 100%;
 }
 
 #footer::before{
