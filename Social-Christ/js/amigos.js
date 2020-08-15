@@ -69,7 +69,7 @@ function callFriendsData(){
 async function callFriends(){
     await callFriendsData();
 }
-callFriends();
+    callFriends();
 
 
 function eliminarAmigo(friendId){
