@@ -113,7 +113,7 @@
                         <div class="contact">
                         	<img src="images/users/user-2.jpg" alt="" class="profile-photo-sm pull-left"/>
                         	<div class="msg-preview">
-                        		<h6>Chat de la comunidad</h6>
+                        		<h6>Chat de los lapicistas</h6>
                         		<p class="text-muted">Escribe tu mensaje</p>
                             <small class="text-muted">a min ago</small>
                             <div class="chat-alert"></div>
@@ -134,7 +134,9 @@
 
                   <div class="send-message">
                     <div class="input-group">
-                      <input type="text" class="form-control" placeholder="escribe tu mensaje" id="MensajeChat">
+                      <input type="text" class="form-control" placeholder="escribe tu mensaje" id="MensajeChat" style="width: 90%;"> 
+                      <button class="ion-images" onclick="cargarImgChat()"></button>
+                      <input type="file" id="imgValue" onchange="enviarImgChat()" style="display: none;">
                       <span class="input-group-btn">
                         <button class="btn btn-default" type="button" onclick="EnviarMensaje()">Enviar</button>
                       </span>

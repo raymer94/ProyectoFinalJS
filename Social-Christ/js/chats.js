@@ -105,7 +105,8 @@ function pintar(){
                       	</ul>
                       </div>
                     </div>`
-                for (let index = 0; index < mensajes.length; index++) {                   
+                for (let index = 0; index < mensajes.length; index++) {  
+                    let img = `<img src="${on.data().message[index].urlFoto}"/>`;                 
                     document.getElementById("listaChatDentro").innerHTML += `
                     <li class="${on.data().message[index].id == doc ? "right" : "left"}">
                         <img src="${on.data().message[index].foto == "" ?  "./images/usuario.jpg" : on.data().message[index].foto}" alt="" class="profile-photo-sm pull-${on.data().message[index].id == doc ? "right" : "left"}" />
@@ -114,7 +115,7 @@ function pintar(){
                                     <h5>${on.data().message[index].nombre}</h5>
                                     <small class="text-muted">3 days ago</small>
                                 </div>
-                                <p>${on.data().message[index].message}</p>
+                                <p>${on.data().message[index].urlFoto != null ? img : on.data().message[index].message}</p>
                             </div>
                     </li>`
                 }
@@ -143,6 +144,11 @@ database.collection("users").onSnapshot((e) => {
 function EnviarMensaje(){
     //enviar mensaje
     let mensaje = document.getElementById("MensajeChat").value;
+    let imagen = document.getElementById("imgValue").files[0];
+    if(imagen != null){
+        SubirImg(imagen)
+    }
+    else{
             database.collection('users').doc(doc).get().then((on)=>{
                 currentUser = on.data().username;
                 database.collection('users').doc("F5Z1xI8rL2c0p3t4QUbBrmDJSU72").collection("friends").doc("MPqR8pYaTUfsyMP3MdXoZ7PIisJ3").update({
@@ -153,5 +159,35 @@ function EnviarMensaje(){
             });
             //console.log(currentUser)
             document.getElementById("MensajeChat").value = "";
-            
+        }
+}
+
+function cargarImgChat(){
+    document.getElementById("imgValue").click();
+}
+
+function enviarImgChat(){
+    alert("Imagen cargada, pulse enviar para mostrar en el chat");
+}
+
+function SubirImg(imagen){
+    let name = imagen.name;
+    let ref = firebase.storage().ref();
+  const metadata = {
+      contentType: imagen.type
+  }
+
+  const task = ref.child(name).put(imagen, metadata); 
+  //ref.child(name).getDownloadURL().then(url => console.log(url));
+  task.then(snapShot => snapShot.ref.getDownloadURL())
+  .then(url => {
+    database.collection('users').doc(doc).get().then((on)=>{
+        currentUser = on.data().username;
+        database.collection('users').doc("F5Z1xI8rL2c0p3t4QUbBrmDJSU72").collection("friends").doc("MPqR8pYaTUfsyMP3MdXoZ7PIisJ3").update({
+                message: firebase.firestore.FieldValue.arrayUnion(
+                    {id: doc, nombre: on.data().username, urlFoto: url, foto: on.data().imagenPerfilUrl}
+                    )
+            })
+    });
+  });
 }
