@@ -80,3 +80,11 @@ function eliminarAmigo(friendId){
         alert("error " + err);
     })
 }
+
+database.collection("users").onSnapshot((e) => {
+    e.forEach(element => {
+  document.getElementById("userOnline").innerHTML += `<li><a href="chats.html" title="${element.data().username}">
+  <img src="${element.data().imagenPerfilUrl == "" ?  "./images/usuario.jpg": element.data().imagenPerfilUrl}" alt="user" class="img-responsive profile-photo" />
+  <span class="online-dot"></span></a></li>`;
+})
+})

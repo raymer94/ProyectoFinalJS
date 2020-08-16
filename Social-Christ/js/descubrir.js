@@ -38,6 +38,10 @@ database.collection("users").onSnapshot((e) => {
       </div>
     </div>
   </div>`;
+  document.getElementById("userOnline").innerHTML += `<li><a href="chats.html" title="${element.data().username}">
+  <img src="${element.data().imagenPerfilUrl == "" ?  "./images/usuario.jpg": element.data().imagenPerfilUrl}" alt="user" class="img-responsive profile-photo" />
+  <span class="online-dot"></span></a></li>`;
+
   if(firebase.auth().currentUser.uid == element.id){
     document.getElementById("usurName").innerHTML = element.data().username;
     $(`#${element.id}`).prop('disabled', true);
