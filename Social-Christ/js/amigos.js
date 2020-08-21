@@ -1,6 +1,7 @@
 var database = firebase.firestore();
 var doc;
 var UsuariosId = [];
+var amigos = [];
 
 function callUsersData(){
     return new Promise(()=>{
@@ -40,6 +41,8 @@ function callFriendsData(){
                         {
                             database.collection("users").doc(element.id).onSnapshot((on) => {  
                                 console.log("este es el dato del amigo" + on.data().username);
+                                amigos.push(on.data().username);
+                                document.getElementById("seguidores").innerHTML = `<i class="ion ion-android-person-add"></i> ${amigos.length} followers`;
                                 document.getElementById("friendsList").innerHTML += 
                                     `<div class="row">
                                         <div class="col-md-10 col-sm-6">

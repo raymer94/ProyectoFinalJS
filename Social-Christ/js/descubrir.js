@@ -1,5 +1,5 @@
 var database = firebase.firestore();
-
+var amigos = [];
 
 function callFriendsData(){
     return new Promise(()=>{
@@ -7,10 +7,12 @@ function callFriendsData(){
             let doc = firebase.auth().currentUser.uid;            
             database.collection("users").doc(doc).collection("friends").get().then((e) => {
                 e.forEach((element) => {
+                  amigos.push(element.id);
                     console.log(element.id);
                     $(`#${element.id}`).prop('disabled', true);
                 })
             })
+            document.getElementById("seguidores").innerHTML = `<i class="ion ion-android-person-add"></i> ${amigos.length} followers`;
         },1000)
     })
 }
